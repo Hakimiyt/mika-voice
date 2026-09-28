@@ -1,0 +1,1 @@
+{"name":"mika-voice","version":"1.0.0","type":"module","private":true,"scripts":{"start":"node --env-file=.env server.js"},"dependencies":{"dotenv":"^18.0.4","express":"^4.22.3","openai":"^7.23.0"}}
