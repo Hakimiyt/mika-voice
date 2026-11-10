@@ -1,109 +1,109 @@
 # Mika Voice
 
-Chatbot AI dengan avatar 3D (VRM) yang boleh **bercakap, gerak mulut, berkelip dan mengikut kursor**. Mika faham BM, English dan Jepun, dan membalas dalam bahasa yang sama dengan mesej anda.
+An AI chatbot with a 3D (VRM) avatar that can **talk, move its mouth, blink, and follow your cursor**. Mika understands Malay, English and Japanese, and replies in the same language as your message.
 
-## Ciri-ciri
+## Features
 
-- Avatar 3D format `.vrm` (Three.js + `@pixiv/three-vrm`)
-- Otak AI menggunakan **Groq** (model `openai/gpt-oss-120b`)
-- Balas automatik dalam bahasa yang sama (BM / EN / JP)
-- Suara Mika menggunakan suara terbina dalam browser (`speechSynthesis`), percuma dan tanpa pemasangan tambahan
-- Input suara melalui mikrofon: klik 🎙️ untuk mula, cakap selama mana anda mahu, klik ⏹ untuk hantar
-- Ekspresi muka (neutral, happy, think, surprised) dan gerak mulut semasa bercakap
-- API key kekal di server (`.env`), tidak pernah sampai ke browser
+- 3D avatar in `.vrm` format (Three.js + `@pixiv/three-vrm`)
+- AI brain powered by **Groq** (model `openai/gpt-oss-120b`)
+- Automatically replies in the same language (BM / EN / JP)
+- Mika's voice uses the browser's built-in voices (`speechSynthesis`), free and with no extra installation
+- Voice input via microphone: click 🎙️ to start, speak for as long as you like, click ⏹ to send
+- Facial expressions (neutral, happy, think, surprised) and mouth movement while speaking
+- The API key stays on the server (`.env`) and never reaches the browser
 
-## Cara kerja
+## How It Works
 
 ```
-Taip / 🎙️ mikrofon  →  public/api/chat.php  →  Groq API
-                                   ↓
-                        jawapan + kod bahasa
-                                   ↓
-              speechSynthesis (suara browser) + gerak mulut avatar
+Type / 🎙️ microphone  →  public/api/chat.php  →  Groq API
+                                    ↓
+                         reply + language code
+                                    ↓
+              speechSynthesis (browser voice) + avatar mouth movement
 ```
 
-## Keperluan
+## Requirements
 
-- [Laragon](https://laragon.org) (Apache + PHP 8+) atau mana-mana pelayan PHP tempatan
-- Akaun percuma Groq untuk API key: https://console.groq.com
-- **Google Chrome** atau **Microsoft Edge** (untuk mikrofon dan suara)
-- Sambungan internet (Three.js dimuat dari CDN)
-- Fail model `.vrm` anda sendiri (lihat bahagian [Model avatar](#model-avatar))
+- [Laragon](https://laragon.org) (Apache + PHP 8+) or any local PHP server
+- A free Groq account for an API key: https://console.groq.com
+- **Google Chrome** or **Microsoft Edge** (for the microphone and voices)
+- An internet connection (Three.js is loaded from a CDN)
+- Your own `.vrm` model file (see the [Avatar Model](#avatar-model) section)
 
-## Pemasangan
+## Installation
 
-1. Salin folder projek ke `C:\laragon\www\mika-voice`.
-2. Salin `.env.example` menjadi `.env`, kemudian isi `GROQ_API_KEY`:
+1. Copy the project folder to `C:\laragon\www\mika-voice`.
+2. Copy `.env.example` to `.env`, then fill in `GROQ_API_KEY`:
 
    ```
-   GROQ_API_KEY=isi_key_anda_di_sini
+   GROQ_API_KEY=put_your_key_here
    GROQ_MODEL=openai/gpt-oss-120b
    ```
 
-3. Letak model VRM di `public/models/mika.vrm`.
+3. Place your VRM model at `public/models/mika.vrm`.
 4. Start Laragon (Apache + PHP).
-5. Buka **http://localhost/mika-voice/public/** dalam Chrome atau Edge.
+5. Open **http://localhost/mika-voice/public/** in Chrome or Edge.
 
-> Guna `localhost`. Mikrofon hanya berfungsi pada `localhost` atau HTTPS. Jangan buka `index.html` terus (`file://`), kerana API tidak akan berfungsi.
+> Use `localhost`. The microphone only works on `localhost` or HTTPS. Don't open `index.html` directly (`file://`), because the API won't work.
 
-## Cara guna
+## Usage
 
-- **Menaip:** tulis mesej, tekan Enter atau butang ➤.
-- **Suara:** klik 🎙️, mula bercakap, klik ⏹ bila selesai. Bahasa pengecaman suara mengikut dropdown **BM / EN / JP** di sebelah kotak input.
-- **Ekspresi:** klik ikon emoji di penjuru kanan atas untuk tukar ekspresi Mika sementara.
-- Mika membalas dalam bahasa yang anda guna, tidak kira apa yang dipilih pada dropdown.
+- **Typing:** write a message, then press Enter or the ➤ button.
+- **Voice:** click 🎙️, start speaking, and click ⏹ when you're done. The speech recognition language follows the **BM / EN / JP** dropdown next to the input box.
+- **Expressions:** click the emoji icon in the top-right corner to temporarily change Mika's expression.
+- Mika replies in the language you use, regardless of what is selected in the dropdown.
 
-## Model avatar
+## Avatar Model
 
-Projek ini **tidak menyertakan fail model** kerana isu lesen.
+This project **does not include the model file** due to licensing issues.
 
-- Buat model sendiri dengan [VRoid Studio](https://vroid.com/en/studio) (percuma), eksport sebagai `.vrm`, atau guna model yang lesennya membenarkan penggunaan anda.
-- Letak fail di `public/models/mika.vrm`.
-- Semak syarat lesen model sebelum menyiarkan projek secara awam atau komersial.
-- Jangan guna model watak berhak cipta.
+- Make your own with [VRoid Studio](https://vroid.com/en/studio) (free) and export it as `.vrm`, or use a model whose license permits your use.
+- Place the file at `public/models/mika.vrm`.
+- Check the model's license terms before publishing the project publicly or commercially.
+- Don't use models of copyrighted characters.
 
-## Tetapan `.env`
+## `.env` Settings
 
-| Pemboleh ubah | Penerangan | Lalai |
+| Variable | Description | Default |
 |---|---|---|
-| `GROQ_API_KEY` | API key Groq | (wajib) |
-| `GROQ_MODEL` | Model Groq yang digunakan | `openai/gpt-oss-120b` |
+| `GROQ_API_KEY` | Groq API key | (required) |
+| `GROQ_MODEL` | Groq model to use | `openai/gpt-oss-120b` |
 
-## Penyelesaian masalah
+## Troubleshooting
 
 **`Groq API Reject ... model does not exist`**
-Model yang anda guna dah dimansuhkan oleh Groq. Semak senarai model semasa di https://console.groq.com/docs/models dan kemas kini `GROQ_MODEL`.
+The model you're using has been deprecated by Groq. Check the current model list at https://console.groq.com/docs/models and update `GROQ_MODEL`.
 
-**`AI tidak memberikan jawapan`**
-Model reasoning boleh memulangkan `content` kosong. Pastikan `chat.php` menghantar `include_reasoning: false` dan `max_completion_tokens` yang cukup.
+**`AI did not provide an answer`**
+Reasoning models can return empty `content`. Make sure `chat.php` sends `include_reasoning: false` and a sufficient `max_completion_tokens`.
 
-**Mika tidak bersuara / suara pelik**
-Suara datang daripada browser. Guna **Microsoft Edge** untuk suara Melayu semula jadi (Yasmin). Semak suara yang tersedia dalam Console (F12):
+**Mika doesn't speak / the voice sounds odd**
+The voice comes from the browser. Use **Microsoft Edge** for a natural-sounding Malay voice (Yasmin). Check the available voices in the Console (F12):
 
 ```js
 speechSynthesis.getVoices().map(v => v.name + " | " + v.lang)
 ```
 
-**Mikrofon tidak berfungsi**
-Benarkan akses mikrofon (ikon kunci di sebelah URL), dan pastikan anda guna Chrome atau Edge pada `localhost`.
+**The microphone doesn't work**
+Allow microphone access (the lock icon next to the URL), and make sure you're using Chrome or Edge on `localhost`.
 
-**Avatar tidak muncul**
-Semak fail `public/models/mika.vrm` wujud dan buka Console (F12) untuk lihat ralat `VRM LOAD ERROR`.
+**The avatar doesn't appear**
+Check that the file `public/models/mika.vrm` exists, and open the Console (F12) to look for a `VRM LOAD ERROR`.
 
-## Keselamatan
+## Security
 
-- Jangan commit fail `.env`. Ia sudah diabaikan oleh `.gitignore`.
-- `.htaccess` menyekat akses terus ke `.env` pada Apache.
-- Kalau anda deploy ke server awam, tambah **rate limit atau pengesahan** pada `public/api/chat.php` supaya kuota API anda tidak disalahguna.
-- `chat.php` mematikan semakan sijil SSL (`verify_peer => false`) supaya mudah dijalankan di Laragon. **Jangan** gunakan tetapan ini di pelayan sebenar.
+- Don't commit the `.env` file. It is already ignored by `.gitignore`.
+- `.htaccess` blocks direct access to `.env` on Apache.
+- If you deploy to a public server, add **rate limiting or authentication** to `public/api/chat.php` so your API quota isn't abused.
+- `chat.php` disables SSL certificate verification (`verify_peer => false`) to make it easy to run on Laragon. **Do not** use this setting on a real server.
 
-## Teknologi
+## Tech Stack
 
-- PHP (backend ringkas)
-- [Three.js](https://threejs.org) dan [@pixiv/three-vrm](https://github.com/pixiv/three-vrm)
+- PHP (simple backend)
+- [Three.js](https://threejs.org) and [@pixiv/three-vrm](https://github.com/pixiv/three-vrm)
 - [Groq](https://groq.com) API
-- Web Speech API (`speechSynthesis` dan `SpeechRecognition`)
+- Web Speech API (`speechSynthesis` and `SpeechRecognition`)
 
-## Lesen
+## License
 
-Tambah fail `LICENSE` (contoh: MIT) mengikut pilihan anda.
+Add a `LICENSE` file (e.g. MIT) according to your preference.
